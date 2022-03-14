@@ -1,5 +1,6 @@
 package dao;
 
+import entity.Laptop;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -42,15 +43,20 @@ public class PhoneDAO {
         session.close();
     }
 
-//    public void updateLaptop(String newAuthor, Long id) {
-//        Book newBook = this.getBookById(id);
-//        newBook.setAuthor(newAuthor);
-//        session = factory.openSession();
-//        Transaction transaction = session.beginTransaction();
-//        session.update(newBook);
-//        transaction.commit();
-//        session.close();
-//    }
+    public void updatePhone(double price, String name, int voltage, boolean hasTouch, int numbOfSims, long id) {
+        Phone phone = this.getPhoneById(id);
+        phone.setPrice(price);
+        phone.setName(name);
+        phone.setVoltage(voltage);
+        phone.setHasTouch(hasTouch);
+        phone.setNumbOfSims(numbOfSims);
+
+        session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(phone);
+        transaction.commit();
+        session.close();
+    }
 
     public List<Phone> getAllPhones() {
         session = factory.openSession();

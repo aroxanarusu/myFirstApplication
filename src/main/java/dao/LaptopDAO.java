@@ -41,15 +41,20 @@ public class LaptopDAO {
         session.close();
     }
 
-//    public void updateLaptop(String newAuthor, Long id) {
-//        Book newBook = this.getBookById(id);
-//        newBook.setAuthor(newAuthor);
-//        session = factory.openSession();
-//        Transaction transaction = session.beginTransaction();
-//        session.update(newBook);
-//        transaction.commit();
-//        session.close();
-//    }
+    public void updateLaptop(double price, String name, int voltage, boolean hasGraphicCard, int numbOfPorts, long id) {
+        Laptop newLaptop = this.getLaptopById(id);
+        newLaptop.setPrice(price);
+        newLaptop.setName(name);
+        newLaptop.setVoltage(voltage);
+        newLaptop.setHasGraphicCard(hasGraphicCard);
+        newLaptop.setNumbOfPorts(numbOfPorts);
+
+        session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(newLaptop);
+        transaction.commit();
+        session.close();
+    }
 
     public List<Laptop> getAllLaptops() {
         session = factory.openSession();

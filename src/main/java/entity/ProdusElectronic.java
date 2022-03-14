@@ -2,6 +2,7 @@ package entity;
 
 import javax.persistence.*;
 
+@Entity
 public abstract class ProdusElectronic extends Produs {
 
     @Column(name = "Voltage", length = 100)

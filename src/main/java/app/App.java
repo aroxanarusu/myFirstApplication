@@ -2,7 +2,11 @@ package app;
 
 import customWidgets.ActiveSearchBar;
 import dao.ProdusDAO;
+import entity.Laptop;
+import entity.Phone;
+import entity.ProdusElectronic;
 import productViews.LaptopView;
+import productViews.ModifyView;
 import productViews.PhoneView;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -15,6 +19,9 @@ import javafx.stage.Stage;
 import entity.Produs;
 import shop.Shop;
 import util.Utility;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class App extends Application {
     @Override
@@ -76,6 +83,7 @@ public class App extends Application {
 //        gridPane.add(refreshTable, 0, 4);
 
         setDeleteButtonAction(gridPane, deleteProductButton);
+        setUpdateButtonAction(gridPane, modifyProductButton);
 
         generateListOfArticles(gridPane);
 
@@ -88,6 +96,31 @@ public class App extends Application {
             ProdusDAO.getInstance().deleteFromTable(produs.getId());
             Utility.getInstance().refreshTable(Utility.getInstance().getTable(gridPane));
 
+        });
+    }
+
+    private void setUpdateButtonAction(GridPane gridPane, Button updateButton) {
+        updateButton.setOnAction(actionEvent -> {
+            TableView tableView = (TableView) Utility.getInstance().getTable(gridPane);
+            Produs produs = (Produs) tableView.getSelectionModel().getSelectedItem();
+            Map<String, String> mapOfDetails = new HashMap<>();
+            mapOfDetails.put("Price", "Price");
+            mapOfDetails.put("Name", "Name");
+            if (produs instanceof ProdusElectronic) {
+                mapOfDetails.put("Voltage", "Voltage");
+                if (produs instanceof Laptop) {
+                    mapOfDetails.put("Has Graphic Card", "HasGraphicCard");
+                    mapOfDetails.put("Number Of Ports", "NumberOfPorts");
+                } else if (produs instanceof Phone) {
+                    mapOfDetails.put("Number Of Sims", "NumberOfSims");
+                    mapOfDetails.put("Has Touch", "HasTouch");
+                }
+                ModifyView mod = new ModifyView(gridPane, mapOfDetails, produs);
+                mod.show();
+            } else {
+                //TODO
+            }
+            Utility.getInstance().refreshTable(Utility.getInstance().getTable(gridPane));
         });
     }
 

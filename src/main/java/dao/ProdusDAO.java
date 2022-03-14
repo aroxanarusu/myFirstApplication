@@ -37,7 +37,7 @@ public class ProdusDAO {
     }
 
     public Produs getProductById(Long id) {
-        log.info("Get book by id: " + id);
+        log.info("Get product by id: " + id);
         Session session = factory.openSession();
         Produs prod = (session.get(Produs.class, id));
         session.close();
@@ -51,4 +51,5 @@ public class ProdusDAO {
         transaction.commit();
         session.close();
     }
+
 }

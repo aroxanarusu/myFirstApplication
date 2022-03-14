@@ -1,6 +1,7 @@
 package entity;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 
 
@@ -10,6 +11,7 @@ import java.io.Serializable;
 //        discriminatorType = DiscriminatorType.STRING)
 public abstract class Produs implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 7084896588259376416L;
 
     @Id

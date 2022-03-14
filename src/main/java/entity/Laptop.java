@@ -3,7 +3,6 @@ package entity;
 import javax.persistence.*;
 
 @Entity
-//@DiscriminatorValue("Laptop")
 public class Laptop extends ProdusElectronic {
 
     @Column(name = "HasGraphicCard")
